@@ -184,24 +184,6 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange }) => {
             <Text className="p-4-8" pdfMode={pdfMode}>
               {invoice.companyCountry}
             </Text>
-            <EditableInput
-              placeholder="Company's Address"
-              value={invoice.companyAddress}
-              onChange={(value) => handleChange('companyAddress', value)}
-              pdfMode={pdfMode}
-            />
-            <EditableInput
-              placeholder="City, State Zip"
-              value={invoice.companyAddress2}
-              onChange={(value) => handleChange('companyAddress2', value)}
-              pdfMode={pdfMode}
-            />
-            <EditableSelect
-              options={countryList}
-              value={invoice.companyCountry}
-              onChange={(value) => handleChange('companyCountry', value)}
-              pdfMode={pdfMode}
-            />
           </View>
           <View className="w-50" pdfMode={pdfMode}>
             <EditableInput
