@@ -402,7 +402,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange }) => {
               </View>
               <View className="w-50 p-5" pdfMode={pdfMode}>
                 <Text className="right bold dark" pdfMode={pdfMode}>
-                  {(subTotal?.toFixed(2) || '0.00')}
+                  {String(subTotal?.toFixed(2) || '0.00')}
                 </Text>
               </View>
             </View>
@@ -416,7 +416,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange }) => {
               </View>
               <View className="w-50 p-5" pdfMode={pdfMode}>
                 <Text className="right bold dark" pdfMode={pdfMode}>
-                  -{(discount ?? 0).toFixed(2)}
+                  {`-${(discount ?? 0).toFixed(2)}`}
                 </Text>
               </View>
             </View>
