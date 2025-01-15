@@ -13,6 +13,7 @@ interface Props {
   onChangeImage?: (value: string) => void
   onChangeWidth?: (value: number) => void
   pdfMode?: boolean
+  disableUpload?: boolean  // Add new prop
 }
 
 const EditableFileImage: FC<Props> = ({
@@ -23,6 +24,7 @@ const EditableFileImage: FC<Props> = ({
   onChangeImage,
   onChangeWidth,
   pdfMode,
+  disableUpload = false,  // Default to false
 }) => {
   const fileInput = useRef<HTMLInputElement>(null)
   const widthWrapper = useRef<HTMLDivElement>(null)
@@ -80,6 +82,15 @@ const EditableFileImage: FC<Props> = ({
     }
   }
 
+  const getImagePath = (value: string) => {
+    if (value.startsWith('data:') || value.startsWith('http')) {
+      return value;
+    }
+    // Remove leading slash if present
+    const path = value.startsWith('/') ? value.slice(1) : value;
+    return path;
+  };
+
   if (pdfMode) {
     if (value) {
       return (
@@ -88,7 +99,7 @@ const EditableFileImage: FC<Props> = ({
             ...compose(`image ${className ? className : ''}`),
             maxWidth: width,
           }}
-          src={value}
+          src={getImagePath(value)}
         />
       )
     } else {
@@ -99,28 +110,32 @@ const EditableFileImage: FC<Props> = ({
   return (
     <div className={`image ${value ? 'mb-5' : ''} ${className ? className : ''}`}>
       {!value ? (
-        <button type="button" className="image__upload" onClick={handleUpload}>
+        <div className="image__placeholder">
           {placeholder}
-        </button>
+        </div>
       ) : (
         <>
           <img
-            src={value}
+            src={getImagePath(value)}
             className="image__img"
             alt={placeholder}
             style={{ maxWidth: width || 100 }}
           />
 
-          <button type="button" className="image__change" onClick={handleUpload}>
-            Change Image
-          </button>
+          {!disableUpload && (  // Only show these buttons if upload is enabled
+            <>
+              <button type="button" className="image__change" onClick={handleUpload}>
+                Change Image
+              </button>
+
+              <button type="button" className="image__remove" onClick={clearImage}>
+                Remove
+              </button>
+            </>
+          )}
 
           <button type="button" className="image__edit" onClick={handleEdit}>
             Resize Image
-          </button>
-
-          <button type="button" className="image__remove" onClick={clearImage}>
-            Remove
           </button>
 
           {isEditing && (
@@ -139,14 +154,16 @@ const EditableFileImage: FC<Props> = ({
         </>
       )}
 
-      <input
-        ref={fileInput}
-        tabIndex={-1}
-        type="file"
-        accept="image/*"
-        className="image__file"
-        onChange={handleChangeImage}
-      />
+      {!disableUpload && (  // Only render input if upload is enabled
+        <input
+          ref={fileInput}
+          tabIndex={-1}
+          type="file"
+          accept="image/*"
+          className="image__file"
+          onChange={handleChangeImage}
+        />
+      )}
     </div>
   )
 }

@@ -1,11 +1,16 @@
 import { CSSClasses } from '../data/types'
 
+const colorGold = '#CAA678'
 const colorDark = '#222'
 const colorDark2 = '#666'
 const colorGray = '#e3e3e3'
 const colorWhite = '#fff'
 
 const styles: CSSClasses = {
+  gold: {
+    color: colorGold,
+  },
+
   dark: {
     color: colorDark,
   },

@@ -1,0 +1,186 @@
+.template-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.template-page__container {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.template-page__title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.template-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.template-list__search-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.template-list__search {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.template-list__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  min-height: min-content; /* Ensure grid expands with content */
+}
+
+.template-list__item {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;  /* Changed from space-between to flex-start */
+  align-items: center;
+  padding: 16px;
+  background: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  gap: 15px;
+}
+
+.template-list__item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.template-list__item-name {
+  flex: 2;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+  text-align: left;
+  padding-right: 15px;
+  min-width: 200px;  /* Ensure minimum width for name */
+}
+
+.template-list__item-amount {
+  flex: 1;
+  font-size: 14px;
+  color: #28a745;
+  font-weight: 500;
+  text-align: right;
+  min-width: 100px;  /* Ensure minimum width for amount */
+}
+
+.template-list__item-date {
+  flex: 1;
+  font-size: 14px;
+  color: #666;
+  text-align: right;
+  white-space: nowrap;
+  min-width: 100px;  /* Ensure minimum width for date */
+}
+
+.template-list__item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.template-page__back-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.template-page__back-button:hover {
+  background-color: #0056b3;
+}
+
+.template-list__empty {
+  text-align: center;
+  color: #666;
+  padding: 20px;
+}
+
+.template-list__items {
+  height: 500px;  /* Fixed height */
+  overflow-y: auto;  /* Enable vertical scrolling */
+  padding: 20px;
+  border-radius: 8px;
+  
+}
+
+/* Add scrollbar styling */
+.template-list__items::-webkit-scrollbar {
+  width: 8px;
+}
+
+.template-list__items::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.template-list__items::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.template-list__items::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.template-list__header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.template-list__sort-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.sort-button {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sort-button:hover {
+  background: #f5f5f5;
+}
+
+.sort-button.active {
+  background: #007bff;
+  color: white;
+  border-color: #0056b3;
+}

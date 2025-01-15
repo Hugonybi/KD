@@ -1,4 +1,5 @@
 const countryList = [
+  { value: 'Nigeria', text: 'Nigeria' },
   { value: 'Bangladesh', text: 'Bangladesh' },
   { value: 'Belgium', text: 'Belgium' },
   { value: 'Burkina Faso', text: 'Burkina Faso' },
@@ -150,7 +151,6 @@ const countryList = [
   { value: 'New Caledonia', text: 'New Caledonia' },
   { value: 'Niger', text: 'Niger' },
   { value: 'Norfolk Island', text: 'Norfolk Island' },
-  { value: 'Nigeria', text: 'Nigeria' },
   { value: 'New Zealand', text: 'New Zealand' },
   { value: 'Nepal', text: 'Nepal' },
   { value: 'Nauru', text: 'Nauru' },

@@ -1,25 +1,24 @@
-import { ProductLine, Invoice } from './types'
+import { Invoice } from './types'
 
-export const initialProductLine: ProductLine = {
+export const initialProductLine = {
   description: '',
   quantity: '1',
   rate: '0.00',
 }
 
 export const initialInvoice: Invoice = {
-  logo: '',
-  logoWidth: 100,
+  logo: 'logo.png',
+  logoWidth: 150,
   title: 'INVOICE',
   companyName: '',
-  name: '',
-  companyAddress: '',
-  companyAddress2: '',
-  companyCountry: 'United States',
+  companyAddress: 'Suite 201, The Capital Hub',
+  companyAddress2: 'Plot 272, Ahmadu Bello Way, Kado, Abuja',
+  companyCountry: 'Nigeria',
   billTo: 'Bill To:',
   clientName: '',
   clientAddress: '',
   clientAddress2: '',
-  clientCountry: 'United States',
+  clientCountry: 'Nigeria',
   invoiceTitleLabel: 'Invoice#',
   invoiceTitle: '',
   invoiceDateLabel: 'Invoice Date',
@@ -30,21 +29,13 @@ export const initialInvoice: Invoice = {
   productLineQuantity: 'Qty',
   productLineQuantityRate: 'Rate',
   productLineQuantityAmount: 'Amount',
-  productLines: [
-    {
-      description: 'Brochure Design',
-      quantity: '2',
-      rate: '100.00',
-    },
-    { ...initialProductLine },
-    { ...initialProductLine },
-  ],
+  productLines: [{ ...initialProductLine }],
   subTotalLabel: 'Sub Total',
-  taxLabel: 'Sale Tax (10%)',
+  taxLabel: 'Discount (0%)',  // Changed from 'Sales Tax (0%)'
   totalLabel: 'TOTAL',
-  currency: '$',
+  currency: '₦',
   notesLabel: 'Notes',
-  notes: 'It was great doing business with you.',
+  notes: 'Thanks for your business!',
   termLabel: 'Terms & Conditions',
-  term: 'Please make the payment by the due date.',
+  term: 'Please make payment within 15 days'
 }

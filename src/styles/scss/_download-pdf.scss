@@ -1,0 +1,20 @@
+.download-pdf {
+  // ...existing code...
+
+  &__new {
+    display: inline-flex;
+    align-items: center;
+    background: #4CAF50;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    font-size: 14px;
+
+    &:hover {
+      background: #45a049;
+    }
+  }
+}
