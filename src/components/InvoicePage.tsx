@@ -26,13 +26,17 @@ Font.register({
   ],
 })
 
+const COMPANY_LOGO = '/logo.png'; // Update this path to your actual logo path
+const LOGO_WIDTH = 150; // Set your desired fixed width
+
 interface Props {
   data?: Invoice
   pdfMode?: boolean
   onChange?: (invoice: Invoice) => void
+  readOnly?: boolean  // Add this prop
 }
 
-const InvoicePage: FC<Props> = ({ data, pdfMode, onChange }) => {
+const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
   const [invoice, setInvoice] = useState<Invoice>(data ? { ...data } : { ...initialInvoice })
   const [subTotal, setSubTotal] = useState<number>()
   const [discount, setDiscount] = useState<number>()  // Renamed from saleTax
@@ -160,19 +164,18 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange }) => {
   return (
     <Document pdfMode={pdfMode}>
       <Page className="invoice-wrapper" pdfMode={pdfMode}>
-        {!pdfMode && <Download data={invoice} setData={(d) => setInvoice(d)} />}
+        {!pdfMode && !readOnly && <Download data={invoice} setData={(d) => setInvoice(d)} />}
 
         <View className="flex" pdfMode={pdfMode}>
           <View className="w-50" pdfMode={pdfMode}>
             <EditableFileImage
               className="logo p-10"
-              placeholder="Your Logo"
-              value={invoice.logo}
-              width={invoice.logoWidth}
+              placeholder="Company Logo"
+              value={COMPANY_LOGO}
+              width={LOGO_WIDTH}
               pdfMode={pdfMode}
-              onChangeImage={(value) => handleChange('logo', value)}
-              onChangeWidth={(value) => handleChange('logoWidth', value)}
-              disableUpload={true}  // Disable upload for logo
+              disableUpload={true}
+              readOnly={true}
             />
             
             <Text className="p-4-8" pdfMode={pdfMode}>

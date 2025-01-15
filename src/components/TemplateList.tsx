@@ -1,5 +1,6 @@
 import { FC, useState, useEffect } from 'react'
 import { Invoice, TInvoice } from '../data/types'
+import PreviewInvoicePage from './PreviewInvoicePage'  // Add this import
 
 type SortOption = 'date' | 'name' | 'amount';
 
@@ -20,6 +21,7 @@ const TemplateList: FC<Props> = ({ onSelect }) => {
   const [filteredTemplates, setFilteredTemplates] = useState<TemplateItem[]>([])
   const [sortBy, setSortBy] = useState<SortOption>('date')
   const [sortAsc, setSortAsc] = useState(false)
+  const [previewTemplate, setPreviewTemplate] = useState<Invoice | null>(null);
 
   const calculateAmount = (templateData: string): number => {
     try {
@@ -66,32 +68,32 @@ const TemplateList: FC<Props> = ({ onSelect }) => {
     });
   };
 
-  useEffect(() => {
-    // Load templates from localStorage on component mount
-    const loadTemplates = () => {
-      const templateItems: TemplateItem[] = [];
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key && key.endsWith('.template')) {
-          const data = localStorage.getItem(key);
-          if (data) {
-            templateItems.push({
-              name: key.replace('.template', ''),
-              data: data,
-              lastModified: localStorage.getItem(key + '_modified') 
-                ? parseInt(localStorage.getItem(key + '_modified') || '0')
-                : Date.now(),
-              amount: calculateAmount(data)  // Add amount calculation
-            });
-          }
+  const loadTemplates = () => {
+    const templateItems: TemplateItem[] = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.endsWith('.template')) {
+        const data = localStorage.getItem(key);
+        if (data) {
+          templateItems.push({
+            name: key.replace('.template', ''),
+            data: data,
+            lastModified: localStorage.getItem(key + '_modified') 
+              ? parseInt(localStorage.getItem(key + '_modified') || '0')
+              : Date.now(),
+            amount: calculateAmount(data)  // Add amount calculation
+          });
         }
       }
-      
-      // Sort by last modified date (newest first)
-      templateItems.sort((a, b) => b.lastModified - a.lastModified);
-      setTemplates(templateItems);
-      setFilteredTemplates(templateItems);
     }
+    
+    // Sort by last modified date (newest first)
+    templateItems.sort((a, b) => b.lastModified - a.lastModified);
+    setTemplates(templateItems);
+    setFilteredTemplates(templateItems);
+  }
+
+  useEffect(() => {
     loadTemplates();
   }, []);
 
@@ -105,12 +107,32 @@ const TemplateList: FC<Props> = ({ onSelect }) => {
     try {
       const parsed = JSON.parse(templateData);
       const validTemplate = TInvoice.parse(parsed);
-      // Update last modified date when template is opened
-      localStorage.setItem(templateName + '.template_modified', Date.now().toString());
-      onSelect(validTemplate);
+      // Store the template name for later use when editing
+      setPreviewTemplate({
+        ...validTemplate,
+        // Add metadata to the preview template
+        _templateName: templateName // Add internal field to track template name
+      });
     } catch (error) {
       console.error('Failed to load template:', error);
       alert('Failed to load template');
+    }
+  }
+
+  const handleEdit = (updatedTemplate: Invoice) => {
+    if (previewTemplate) {
+      // Get the template name from metadata
+      const templateName = (previewTemplate as any)._templateName;
+      if (templateName) {
+        // Update the template in localStorage
+        const templateData = JSON.stringify(updatedTemplate);
+        localStorage.setItem(templateName + '.template', templateData);
+        localStorage.setItem(templateName + '.template_modified', Date.now().toString());
+        
+        // Reload templates to update the list
+        loadTemplates();
+      }
+      setPreviewTemplate(null);
     }
   }
 
@@ -125,60 +147,70 @@ const TemplateList: FC<Props> = ({ onSelect }) => {
 
   return (
     <div className="template-list">
-      <div className="template-list__header">
-        <div className="template-list__search-container">
-          <input
-            type="search"
-            placeholder="Search templates..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="template-list__search"
-          />
-        </div>
-        <div className="template-list__sort-buttons">
-          <button 
-            className={`sort-button ${sortBy === 'date' ? 'active' : ''}`}
-            onClick={() => handleSort('date')}
-          >
-            Date {sortBy === 'date' && (sortAsc ? '↑' : '↓')}
-          </button>
-          <button 
-            className={`sort-button ${sortBy === 'name' ? 'active' : ''}`}
-            onClick={() => handleSort('name')}
-          >
-            Name {sortBy === 'name' && (sortAsc ? '↑' : '↓')}
-          </button>
-          <button 
-            className={`sort-button ${sortBy === 'amount' ? 'active' : ''}`}
-            onClick={() => handleSort('amount')}
-          >
-            Amount {sortBy === 'amount' && (sortAsc ? '↑' : '↓')}
-          </button>
-        </div>
-      </div>
-      <div className="template-list__items">
-        {filteredTemplates.length === 0 ? (
-          <p className="template-list__empty">No templates found</p>
-        ) : (
-          <div className="template-list__grid">
-            {filteredTemplates.map((template, index) => (
-              <button
-                key={index}
-                className="template-list__item"
-                onClick={() => handleTemplateClick(template.data, template.name)}
+      {previewTemplate ? (
+        <PreviewInvoicePage
+          data={previewTemplate}
+          onEdit={handleEdit}
+          onClose={() => setPreviewTemplate(null)}
+        />
+      ) : (
+        <>
+          <div className="template-list__header">
+            <div className="template-list__search-container">
+              <input
+                type="search"
+                placeholder="Search templates..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="template-list__search"
+              />
+            </div>
+            <div className="template-list__sort-buttons">
+              <button 
+                className={`sort-button ${sortBy === 'date' ? 'active' : ''}`}
+                onClick={() => handleSort('date')}
               >
-                <span className="template-list__item-name">{template.name}</span>
-                <span className="template-list__item-amount">
-                  ${template.amount?.toFixed(2)}
-                </span>
-                <span className="template-list__item-date">
-                  {new Date(template.lastModified).toLocaleDateString()}
-                </span>
+                Date {sortBy === 'date' && (sortAsc ? '↑' : '↓')}
               </button>
-            ))}
+              <button 
+                className={`sort-button ${sortBy === 'name' ? 'active' : ''}`}
+                onClick={() => handleSort('name')}
+              >
+                Name {sortBy === 'name' && (sortAsc ? '↑' : '↓')}
+              </button>
+              <button 
+                className={`sort-button ${sortBy === 'amount' ? 'active' : ''}`}
+                onClick={() => handleSort('amount')}
+              >
+                Amount {sortBy === 'amount' && (sortAsc ? '↑' : '↓')}
+              </button>
+            </div>
           </div>
-        )}
-      </div>
+          <div className="template-list__items">
+            {filteredTemplates.length === 0 ? (
+              <p className="template-list__empty">No templates found</p>
+            ) : (
+              <div className="template-list__grid">
+                {filteredTemplates.map((template, index) => (
+                  <button
+                    key={index}
+                    className="template-list__item"
+                    onClick={() => handleTemplateClick(template.data, template.name)}
+                  >
+                    <span className="template-list__item-name">{template.name}</span>
+                    <span className="template-list__item-amount">
+                      ${template.amount?.toFixed(2)}
+                    </span>
+                    <span className="template-list__item-date">
+                      {new Date(template.lastModified).toLocaleDateString()}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        </>
+      )}
     </div>
   )
 }

@@ -14,6 +14,7 @@ interface Props {
   onChangeWidth?: (value: number) => void
   pdfMode?: boolean
   disableUpload?: boolean  // Add new prop
+  readOnly?: boolean  // Add this prop
 }
 
 const EditableFileImage: FC<Props> = ({
@@ -25,6 +26,7 @@ const EditableFileImage: FC<Props> = ({
   onChangeWidth,
   pdfMode,
   disableUpload = false,  // Default to false
+  readOnly = false,  // Default to false
 }) => {
   const fileInput = useRef<HTMLInputElement>(null)
   const widthWrapper = useRef<HTMLDivElement>(null)
@@ -122,7 +124,7 @@ const EditableFileImage: FC<Props> = ({
             style={{ maxWidth: width || 100 }}
           />
 
-          {!disableUpload && (  // Only show these buttons if upload is enabled
+          {!disableUpload && !readOnly && (  // Only show these buttons if upload is enabled and not readOnly
             <>
               <button type="button" className="image__change" onClick={handleUpload}>
                 Change Image
@@ -134,9 +136,11 @@ const EditableFileImage: FC<Props> = ({
             </>
           )}
 
-          <button type="button" className="image__edit" onClick={handleEdit}>
-            Resize Image
-          </button>
+          {!readOnly && (
+            <button type="button" className="image__edit" onClick={handleEdit}>
+              Resize Image
+            </button>
+          )}
 
           {isEditing && (
             <div ref={widthWrapper} className="image__width-wrapper">
@@ -154,7 +158,7 @@ const EditableFileImage: FC<Props> = ({
         </>
       )}
 
-      {!disableUpload && (  // Only render input if upload is enabled
+      {!disableUpload && !readOnly && (  // Only render input if upload is enabled and not readOnly
         <input
           ref={fileInput}
           tabIndex={-1}

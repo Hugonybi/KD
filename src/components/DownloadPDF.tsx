@@ -60,6 +60,7 @@ const Download: FC<Props> = ({ data, setData }) => {
   const handleCreateNew = () => {
     if (window.confirm('Are you sure you want to create a new invoice? All unsaved changes will be lost.')) {
       setData({ ...initialInvoice })
+      navigate('/')
     }
   }
 
