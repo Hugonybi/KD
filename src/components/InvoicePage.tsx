@@ -176,13 +176,13 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange }) => {
             />
             
             <Text className="p-4-8" pdfMode={pdfMode}>
-              {`${invoice.companyAddress}`}
+              {invoice.companyAddress}
             </Text>
             <Text className="p-4-8" pdfMode={pdfMode}>
-              {`${invoice.companyAddress2}`}
+              {invoice.companyAddress2}
             </Text>
             <Text className="p-4-8" pdfMode={pdfMode}>
-              {`${invoice.companyCountry}`}
+              {invoice.companyCountry}
             </Text>
             <EditableInput
               placeholder="Company's Address"
