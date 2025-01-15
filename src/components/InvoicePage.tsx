@@ -175,6 +175,15 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange }) => {
               disableUpload={true}  // Disable upload for logo
             />
             
+            <Text className="p-4-8" pdfMode={pdfMode}>
+              {`${invoice.companyAddress}`}
+            </Text>
+            <Text className="p-4-8" pdfMode={pdfMode}>
+              {`${invoice.companyAddress2}`}
+            </Text>
+            <Text className="p-4-8" pdfMode={pdfMode}>
+              {`${invoice.companyCountry}`}
+            </Text>
             <EditableInput
               placeholder="Company's Address"
               value={invoice.companyAddress}
