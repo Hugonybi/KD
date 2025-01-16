@@ -18,7 +18,7 @@ const TemplatePage: FC<Props> = ({ onSelect }) => {
   return (
     <div className="template-page">
       <div className="template-page__container">
-        <h1 className="template-page__title">Invoice Templates</h1>
+        <h1 className="template-page__title">Invoice</h1>
         <TemplateList onSelect={handleTemplateSelect} />
         <button 
           className="template-page__back-button"

@@ -103,12 +103,12 @@ const Download: FC<Props> = ({ data, setData }) => {
         className="mt-40"
       >
         <SaveAll />
-        <p className="text-big">Save Template</p>
+        <p className="text-big">Save Invoice</p>
       </button>
 
       <button onClick={() => navigate('/templates')} className="mt-40 ">
         <LibraryBig />
-        <p className="text-big">Browse Templates</p>
+        <p className="text-big">Browse Invoice</p>
       </button>
 
       <Modal show={showTemplates} onClose={() => setShowTemplates(false)}>
