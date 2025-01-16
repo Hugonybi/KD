@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import { FC, useState } from 'react'
 import { PDFDownloadLink } from '@react-pdf/renderer'
 import { FilePlus2, SaveAll, FileDown, LibraryBig } from 'lucide-react'
 import { Invoice } from '../data/types'
