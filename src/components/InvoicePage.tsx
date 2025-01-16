@@ -54,7 +54,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
 
   const handleChange = (name: keyof Invoice, value: string | number) => {
     if (name !== 'productLines') {
-      const newInvoice = { ...invoice }
+      const newInvoice = { ...invoice } as Record<keyof Invoice, string | number | ProductLine[]>
 
       if (name === 'logoWidth' && typeof value === 'number') {
         newInvoice[name] = value
@@ -62,7 +62,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
         newInvoice[name] = value
       }
 
-      setInvoice(newInvoice)
+      setInvoice(newInvoice as Invoice)
     }
   }
 
