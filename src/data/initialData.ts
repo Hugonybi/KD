@@ -33,7 +33,7 @@ export const initialInvoice: Invoice = {
   subTotalLabel: 'Sub Total',
   taxLabel: 'Discount (0%)',  // Changed from 'Sales Tax (0%)'
   totalLabel: 'TOTAL',
-  currency: '₦',
+  currency: 'N',
   notesLabel: 'Notes',
   notes: 'Thanks for your business!',
   termLabel: 'Terms & Conditions',
