@@ -174,8 +174,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
               value={COMPANY_LOGO}
               width={LOGO_WIDTH}
               pdfMode={pdfMode}
-              disableUpload={true}
-              readOnly={true}
+             
             />
             
             <Text className="mt-10 company-details" pdfMode={pdfMode}>

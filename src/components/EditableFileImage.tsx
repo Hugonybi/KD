@@ -1,20 +1,13 @@
-import { FC, useRef, useState } from 'react'
-import Slider from 'rc-slider'
+import { FC } from 'react'
 import { Image } from '@react-pdf/renderer'
-import useOnClickOutside from '../hooks/useOnClickOutside'
 import compose from '../styles/compose'
-import 'rc-slider/assets/index.css'
 
 interface Props {
   className?: string
   placeholder?: string
   value?: string
   width?: number
-  onChangeImage?: (value: string) => void
-  onChangeWidth?: (value: number) => void
   pdfMode?: boolean
-  disableUpload?: boolean  // Add new prop
-  readOnly?: boolean  // Add this prop
 }
 
 const EditableFileImage: FC<Props> = ({
@@ -22,76 +15,12 @@ const EditableFileImage: FC<Props> = ({
   placeholder,
   value,
   width,
-  onChangeImage,
-  onChangeWidth,
   pdfMode,
-  disableUpload = false,  // Default to false
-  readOnly = false,  // Default to false
 }) => {
-  const fileInput = useRef<HTMLInputElement>(null)
-  const widthWrapper = useRef<HTMLDivElement>(null)
-  const [isEditing, setIsEditing] = useState<boolean>(false)
-  const marks = {
-    100: '100px',
-    150: '150px',
-    200: '200px',
-    250: '250px',
-  }
-
-  const handleClickOutside = () => {
-    if (isEditing) {
-      setIsEditing(false)
-    }
-  }
-
-  useOnClickOutside(widthWrapper, handleClickOutside)
-
-  // Commenting out unused functions
-  /*
-  const handleUpload = () => {
-    fileInput?.current?.click()
-  }
-
-  const handleChangeImage = () => {
-    if (fileInput?.current?.files) {
-      const files = fileInput.current.files
-
-      if (files.length > 0 && typeof onChangeImage === 'function') {
-        const reader = new FileReader()
-
-        reader.addEventListener('load', () => {
-          if (typeof reader.result === 'string') {
-            onChangeImage(reader.result)
-          }
-        })
-
-        reader.readAsDataURL(files[0])
-      }
-    }
-  }
-
-  const handleChangeWidth = (value: number) => {
-    if (typeof onChangeWidth === 'function') {
-      onChangeWidth(value)
-    }
-  }
-
-  const handleEdit = () => {
-    setIsEditing(!isEditing)
-  }
-
-  const clearImage = () => {
-    if (typeof onChangeImage === 'function') {
-      onChangeImage('')
-    }
-  }
-  */
-
   const getImagePath = (value: string) => {
     if (value.startsWith('data:') || value.startsWith('http')) {
       return value;
     }
-    // Remove leading slash if present
     const path = value.startsWith('/') ? value.slice(1) : value;
     return path;
   };
