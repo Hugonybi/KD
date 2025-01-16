@@ -15,7 +15,7 @@ interface Props {
   onSelect: (template: Invoice) => void
 }
 
-const TemplateList: FC<Props> = ({ onSelect }) => {
+const TemplateList: FC<Props> = () => {
   const [templates, setTemplates] = useState<TemplateItem[]>([])
   const [searchTerm, setSearchTerm] = useState('')
   const [filteredTemplates, setFilteredTemplates] = useState<TemplateItem[]>([])

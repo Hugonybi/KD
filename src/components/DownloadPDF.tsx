@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import { PDFDownloadLink } from '@react-pdf/renderer'
 import { FilePlus2, SaveAll, FileDown, LibraryBig } from 'lucide-react'
-import { Invoice, TInvoice } from '../data/types'
+import { Invoice } from '../data/types'
 import { useDebounce } from '@uidotdev/usehooks'
 import InvoicePage from './InvoicePage'
 import TemplateList from './TemplateList'
@@ -20,28 +20,28 @@ const Download: FC<Props> = ({ data, setData }) => {
   const debounced = useDebounce(data, 500)
   const navigate = useNavigate()
 
-  function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
-    if (!e.target.files?.length) return
+  // function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
+  //   if (!e.target.files?.length) return
 
-    const file = e.target.files[0]
-    file
-      .text()
-      .then((str: string) => {
-        try {
-          if (!(str.startsWith('{') && str.endsWith('}'))) {
-            str = atob(str)
-          }
-          const d = JSON.parse(str)
-          const dParsed = TInvoice.parse(d)
-          console.info('parsed correctly')
-          setData(dParsed)
-        } catch (e) {
-          console.error(e)
-          return
-        }
-      })
-      .catch((err) => console.error(err))
-  }
+  //   const file = e.target.files[0]
+  //   file
+  //     .text()
+  //     .then((str: string) => {
+  //       try {
+  //         if (!(str.startsWith('{') && str.endsWith('}'))) {
+  //           str = atob(str)
+  //         }
+  //         const d = JSON.parse(str)
+  //         const dParsed = TInvoice.parse(d)
+  //         console.info('parsed correctly')
+  //         setData(dParsed)
+  //       } catch (e) {
+  //         console.error(e)
+  //         return
+  //       }
+  //     })
+  //     .catch((err) => console.error(err))
+  // }
 
   function handleSaveTemplate() {
     const clientName = data.clientName?.trim() || 'unnamed'
