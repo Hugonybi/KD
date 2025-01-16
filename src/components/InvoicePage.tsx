@@ -26,20 +26,20 @@ Font.register({
   ],
 })
 
-const COMPANY_LOGO = '/logo.png'; // Update this path to your actual logo path
-const LOGO_WIDTH = 150; // Set your desired fixed width
+const COMPANY_LOGO = '/logo.png' // Update this path to your actual logo path
+const LOGO_WIDTH = 150 // Set your desired fixed width
 
 interface Props {
   data?: Invoice
   pdfMode?: boolean
   onChange?: (invoice: Invoice) => void
-  readOnly?: boolean  // Add this prop
+  readOnly?: boolean // Add this prop
 }
 
 const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
   const [invoice, setInvoice] = useState<Invoice>(data ? { ...data } : { ...initialInvoice })
   const [subTotal, setSubTotal] = useState<number>()
-  const [discount, setDiscount] = useState<number>()  // Renamed from saleTax
+  const [discount, setDiscount] = useState<number>() // Renamed from saleTax
 
   const dateFormat = 'MMM dd, yyyy'
   const invoiceDate = invoice.invoiceDate !== '' ? new Date(invoice.invoiceDate) : new Date()
@@ -108,16 +108,16 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
   }
 
   const formatNumber = (num: string): string => {
-    const number = parseFloat(num);
-    return isNaN(number) ? '0.00' : number.toFixed(2);
-  };
+    const number = parseFloat(num)
+    return isNaN(number) ? '0.00' : number.toFixed(2)
+  }
 
   const calculateAmount = (quantity: string, rate: string) => {
-    const quantityNumber = parseFloat(quantity) || 0;
-    const rateNumber = parseFloat(rate) || 0;
-    const amount = quantityNumber * rateNumber;
-    return formatNumber(amount.toString());
-  };
+    const quantityNumber = parseFloat(quantity) || 0
+    const rateNumber = parseFloat(rate) || 0
+    const amount = quantityNumber * rateNumber
+    return formatNumber(amount.toString())
+  }
 
   useEffect(() => {
     let subTotal = 0
@@ -150,16 +150,16 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
   useEffect(() => {
     // Sync invoice state with parent data
     if (data) {
-      setInvoice(data);
+      setInvoice(data)
     }
-  }, [data]);
+  }, [data])
 
   useEffect(() => {
     // Sync changes back to parent
     if (onChange) {
-      onChange(invoice);
+      onChange(invoice)
     }
-  }, [invoice, onChange]);
+  }, [invoice, onChange])
 
   return (
     <Document pdfMode={pdfMode}>
@@ -174,9 +174,8 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
               value={COMPANY_LOGO}
               width={LOGO_WIDTH}
               pdfMode={pdfMode}
-             
             />
-            
+
             <Text className="mt-10 company-details" pdfMode={pdfMode}>
               {invoice.companyAddress}
             </Text>
@@ -295,6 +294,20 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
                   pdfMode={pdfMode}
                 />
               </View>
+            </View>
+            <View className="bg-dark mt-40 p-5 pl-10 rounded w-auto" pdfMode={pdfMode}>
+              <Text className="bold gold fs-10" pdfMode={pdfMode}>
+                Bank Details
+              </Text>
+              <Text className="bold white fs-20" pdfMode={pdfMode}>
+                {invoice.accountName}
+              </Text>
+              <Text className="bold white fs-20" pdfMode={pdfMode}>
+                {invoice.accountNumber}
+              </Text>
+              <Text className="bold white fs-20" pdfMode={pdfMode}>
+                {invoice.accountBank}
+              </Text>
             </View>
           </View>
         </View>

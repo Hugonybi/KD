@@ -46,6 +46,9 @@ export const TInvoice = z.object({
   notes: z.string(),
   termLabel: z.string(),
   term: z.string(),
+  accountNumber: z.string(),
+  accountName: z.string(),
+  accountBank: z.string(),
 })
 
 export type Invoice = TypeOf<typeof TInvoice> & {

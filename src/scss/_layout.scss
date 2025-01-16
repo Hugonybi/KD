@@ -57,6 +57,10 @@
   border-bottom: 1px solid $color-gray;
 }
 
+.rounded{
+  border-radius: 8px;
+}
+
 .row__remove {
   display: flex;
   padding: 0;

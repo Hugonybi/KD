@@ -139,8 +139,16 @@ const styles: CSSClasses = {
     fontSize: '45px',
   },
 
+  'rounded':{
+    borderRadius: '8px',
+  },
+
+  'pl-10': {
+    paddingLeft: '10px',
+  },
+
   page: {
-    fontFamily: 'Nunito',
+    fontFamily: 'lato, sans-serif`',
     fontSize: '13px',
     color: '#555',
     padding: '40px 35px',
