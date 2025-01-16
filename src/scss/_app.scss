@@ -43,6 +43,11 @@
 }
 
 .download-pdf {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items:start;
+  justify-content: start;
   position: fixed;
   top: 100px;
   margin-left: -110px;

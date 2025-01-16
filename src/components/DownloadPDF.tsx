@@ -89,22 +89,26 @@ const Download: FC<Props> = ({ data, setData }) => {
         aria-label="Save PDF"
         title="Save PDF"
         className="mt-40"
-      ></PDFDownloadLink>
-      <FileDown />
-      Export PDF
+      >
+        <button>
+          <FileDown />
+          Export PDF
+        </button>
+      </PDFDownloadLink>
 
       <button
         onClick={handleSaveTemplate}
         aria-label="Save Template"
         title="Save Template"
         className="mt-40"
-      />
-      <SaveAll />
-      <p className="text-big">Save Template</p>
+      >
+        <SaveAll />
+        <p className="text-big">Save Template</p>
+      </button>
 
       <button onClick={() => navigate('/templates')} className="mt-40 ">
         <LibraryBig />
-        <p className='text-big'>Browse Templates</p>
+        <p className="text-big">Browse Templates</p>
       </button>
 
       <Modal show={showTemplates} onClose={() => setShowTemplates(false)}>
