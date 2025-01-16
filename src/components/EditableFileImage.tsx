@@ -46,6 +46,8 @@ const EditableFileImage: FC<Props> = ({
 
   useOnClickOutside(widthWrapper, handleClickOutside)
 
+  // Commenting out unused functions
+  /*
   const handleUpload = () => {
     fileInput?.current?.click()
   }
@@ -83,6 +85,7 @@ const EditableFileImage: FC<Props> = ({
       onChangeImage('')
     }
   }
+  */
 
   const getImagePath = (value: string) => {
     if (value.startsWith('data:') || value.startsWith('http')) {

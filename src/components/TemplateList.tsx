@@ -107,12 +107,10 @@ const TemplateList: FC<Props> = ({ onSelect }) => {
     try {
       const parsed = JSON.parse(templateData);
       const validTemplate = TInvoice.parse(parsed);
-      // Store the template name for later use when editing
       setPreviewTemplate({
         ...validTemplate,
-        // Add metadata to the preview template
-        _templateName: templateName // Add internal field to track template name
-      });
+        _templateName: templateName
+      } as Invoice);
     } catch (error) {
       console.error('Failed to load template:', error);
       alert('Failed to load template');

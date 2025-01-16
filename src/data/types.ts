@@ -48,7 +48,9 @@ export const TInvoice = z.object({
   term: z.string(),
 })
 
-export type Invoice = TypeOf<typeof TInvoice>
+export type Invoice = TypeOf<typeof TInvoice> & {
+  _templateName?: string
+}
 
 export interface CSSClasses {
   [key: string]: CSSProperties
