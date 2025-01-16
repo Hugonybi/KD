@@ -49,6 +49,7 @@ export const TInvoice = z.object({
   accountNumber: z.string(),
   accountName: z.string(),
   accountBank: z.string(),
+  discountAmount: z.number().optional(),
 })
 
 export type Invoice = TypeOf<typeof TInvoice> & {

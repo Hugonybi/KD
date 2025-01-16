@@ -38,6 +38,11 @@ const styles: CSSClasses = {
     flexWrap: 'nowrap',
   },
 
+  gap: {
+    gap: '8px',
+  },
+
+
   'w-auto': {
     flex: 1,
     paddingRight: '8px',
@@ -139,8 +144,9 @@ const styles: CSSClasses = {
     fontSize: '45px',
   },
 
-  'rounded':{
+  rounded:{
     borderRadius: '8px',
+    border: `2px solid ${colorGray}}`,
   },
 
   'pl-10': {
@@ -148,7 +154,7 @@ const styles: CSSClasses = {
   },
 
   page: {
-    fontFamily: 'lato, sans-serif`',
+    fontFamily: 'Nunito',
     fontSize: '13px',
     color: '#555',
     padding: '40px 35px',

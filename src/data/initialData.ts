@@ -27,11 +27,12 @@ export const initialInvoice: Invoice = {
   invoiceDueDate: '',
   productLineDescription: 'Item Description',
   productLineQuantity: 'Qty',
-  productLineQuantityRate: 'Rate',
+  productLineQuantityRate: 'Price',
   productLineQuantityAmount: 'Amount',
   productLines: [{ ...initialProductLine }],
   subTotalLabel: 'Sub Total',
-  taxLabel: 'Discount (0%)',  // Changed from 'Sales Tax (0%)'
+  taxLabel: 'Discount',  // Changed from 'Sales Tax (0%)'
+  discountAmount: 0,
   totalLabel: 'TOTAL',
   currency: 'N',
   notesLabel: 'Notes',
