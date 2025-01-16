@@ -116,56 +116,11 @@ const EditableFileImage: FC<Props> = ({
           {placeholder}
         </div>
       ) : (
-        <>
-          <img
-            src={getImagePath(value)}
-            className="image__img"
-            alt={placeholder}
-            style={{ maxWidth: width || 100 }}
-          />
-
-          {!disableUpload && !readOnly && (  // Only show these buttons if upload is enabled and not readOnly
-            <>
-              <button type="button" className="image__change" onClick={handleUpload}>
-                Change Image
-              </button>
-
-              <button type="button" className="image__remove" onClick={clearImage}>
-                Remove
-              </button>
-            </>
-          )}
-
-          {!readOnly && (
-            <button type="button" className="image__edit" onClick={handleEdit}>
-              Resize Image
-            </button>
-          )}
-
-          {isEditing && (
-            <div ref={widthWrapper} className="image__width-wrapper">
-              <Slider
-                min={100}
-                max={250}
-                marks={marks}
-                included={false}
-                step={1}
-                onChange={handleChangeWidth as any}
-                defaultValue={width || 100}
-              />
-            </div>
-          )}
-        </>
-      )}
-
-      {!disableUpload && !readOnly && (  // Only render input if upload is enabled and not readOnly
-        <input
-          ref={fileInput}
-          tabIndex={-1}
-          type="file"
-          accept="image/*"
-          className="image__file"
-          onChange={handleChangeImage}
+        <img
+          src={getImagePath(value)}
+          className="image__img"
+          alt={placeholder}
+          style={{ maxWidth: width || 100 }}
         />
       )}
     </div>

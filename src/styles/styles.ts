@@ -19,6 +19,11 @@ const styles: CSSClasses = {
     color: colorWhite,
   },
 
+  'bg-gold': {
+    backgroundColor: colorGold,
+  },
+
+
   'bg-dark': {
     backgroundColor: colorDark2,
   },
@@ -123,6 +128,10 @@ const styles: CSSClasses = {
   },
 
   'fs-20': {
+    fontSize: '16px',
+  },
+
+  'fs-30': {
     fontSize: '20px',
   },
 
@@ -143,6 +152,10 @@ const styles: CSSClasses = {
 
   logo: {
     display: 'block',
+  },
+
+  'company-details':{
+    fontSize: '10px', 
   },
 }
 

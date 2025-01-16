@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react'
 import { PDFDownloadLink } from '@react-pdf/renderer'
+import { FilePlus2, SaveAll, FileDown, LibraryBig } from 'lucide-react'
 import { Invoice, TInvoice } from '../data/types'
 import { useDebounce } from '@uidotdev/usehooks'
 import InvoicePage from './InvoicePage'
@@ -43,22 +44,26 @@ const Download: FC<Props> = ({ data, setData }) => {
   }
 
   function handleSaveTemplate() {
-    const clientName = data.clientName?.trim() || 'unnamed';
-    const dateStr = format(new Date(), 'MMM-dd');
-    const templateKey = `${clientName}-${dateStr}.template`;
-    
+    const clientName = data.clientName?.trim() || 'unnamed'
+    const dateStr = format(new Date(), 'MMM-dd')
+    const templateKey = `${clientName}-${dateStr}.template`
+
     try {
-      localStorage.setItem(templateKey, JSON.stringify(debounced));
-      localStorage.setItem(templateKey + '_modified', Date.now().toString());
-      alert('Template saved successfully!');
+      localStorage.setItem(templateKey, JSON.stringify(debounced))
+      localStorage.setItem(templateKey + '_modified', Date.now().toString())
+      alert('Template saved successfully!')
     } catch (err) {
-      console.error('Failed to save template:', err);
-      alert('Failed to save template');
+      console.error('Failed to save template:', err)
+      alert('Failed to save template')
     }
   }
 
   const handleCreateNew = () => {
-    if (window.confirm('Are you sure you want to create a new invoice? All unsaved changes will be lost.')) {
+    if (
+      window.confirm(
+        'Are you sure you want to create a new invoice? All unsaved changes will be lost.',
+      )
+    ) {
       setData({ ...initialInvoice })
       navigate('/')
     }
@@ -66,13 +71,14 @@ const Download: FC<Props> = ({ data, setData }) => {
 
   const title = data.invoiceTitle ? data.invoiceTitle.toLowerCase() : 'invoice'
   return (
-    <div className={'download-pdf '}>
+    <div className={'download-pdf'}>
       <button
         onClick={handleCreateNew}
         className="download-pdf__new"
         aria-label="Create New Invoice"
         title="Create New Invoice"
       >
+        <FilePlus2 size={24} />
         Create New
       </button>
 
@@ -82,36 +88,38 @@ const Download: FC<Props> = ({ data, setData }) => {
         fileName={`${title}.pdf`}
         aria-label="Save PDF"
         title="Save PDF"
-        className="download-pdf__pdf"
+        className="mt-40"
       ></PDFDownloadLink>
-      <p>Save PDF</p>
+      <FileDown />
+      Export PDF
 
       <button
         onClick={handleSaveTemplate}
         aria-label="Save Template"
         title="Save Template"
-        className="download-pdf__template_download mt-40"
+        className="mt-40"
       />
-      <p className="text-small">Save Template</p>
+      <SaveAll />
+      <p className="text-big">Save Template</p>
 
-      <button
-        onClick={() => navigate('/templates')}
-        className="download-pdf__template_list"
-      >
-        Browse Templates
+      <button onClick={() => navigate('/templates')} className="mt-40 ">
+        <LibraryBig />
+        <p className='text-big'>Browse Templates</p>
       </button>
-      
+
       <Modal show={showTemplates} onClose={() => setShowTemplates(false)}>
-        <TemplateList onSelect={(template) => {
-          setData(template)
-          setShowTemplates(false)
-        }} />
+        <TemplateList
+          onSelect={(template) => {
+            setData(template)
+            setShowTemplates(false)
+          }}
+        />
       </Modal>
 
-      <label className="download-pdf__template_upload">
+      {/* <label className="download-pdf__template_upload">
         <input type="file" accept=".json,.template" onChange={handleInput} />
       </label>
-      <p className="text-small">Upload Template</p>
+      <p className="text-small">Upload Template</p> */}
     </div>
   )
 }
