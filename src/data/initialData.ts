@@ -39,7 +39,7 @@ export const initialInvoice: Invoice = {
   notes: 'Thanks for your business!',
   termLabel: 'Terms & Conditions',
   term: 'Please make payment within 15 days',
-  accountNumber: '123456789',
-  accountName: 'John Doe',
-  accountBank: 'Bank of America',
+  accountNumber: '0001402682',
+  accountName: 'L JOHNSON ATELIER LTD',
+  accountBank: 'TAAJ BANK',
 }

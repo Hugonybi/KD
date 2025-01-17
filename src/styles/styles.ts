@@ -170,6 +170,7 @@ const styles: CSSClasses = {
 
   'company-details':{
     fontSize: '10px', 
+    color: '#555',
   },
 }
 

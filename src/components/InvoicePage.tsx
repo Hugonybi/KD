@@ -39,7 +39,7 @@ interface Props {
 const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
   const [invoice, setInvoice] = useState<Invoice>(data ? { ...data } : { ...initialInvoice })
   const [subTotal, setSubTotal] = useState<number>()
-  const [discount, setDiscount] = useState<number>(0)  // Initialize with 0
+  const [discount, setDiscount] = useState<number>(0) // Initialize with 0
 
   const dateFormat = 'MMM dd, yyyy'
   const invoiceDate = invoice.invoiceDate !== '' ? new Date(invoice.invoiceDate) : new Date()
@@ -113,11 +113,11 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
 
   const formatNumber = (num: string): string => {
     const number = parseFloat(num)
-    return isNaN(number) 
-      ? '0.00' 
+    return isNaN(number)
+      ? '0.00'
       : number.toLocaleString('en-US', {
           minimumFractionDigits: 2,
-          maximumFractionDigits: 2
+          maximumFractionDigits: 2,
         })
   }
 
@@ -309,11 +309,11 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
               </View>
             </View>
             <View className=" mt-10 p-5 pl-10 rounded" pdfMode={pdfMode}>
-              <Text className="bold dark fs-10" pdfMode={pdfMode}>
+              <Text className="bold dark fs-10 w-10" pdfMode={pdfMode}>
                 Bank Details
               </Text>
-              <View className="flex " pdfMode={pdfMode}>
-                <Text className="bold gold fs-10" pdfMode={pdfMode}>
+              <View className="flex" pdfMode={pdfMode}>
+                <Text className="bold gold company-details" pdfMode={pdfMode}>
                   Account Number
                 </Text>
                 <Text className="bold dark fs-20" pdfMode={pdfMode}>
@@ -321,7 +321,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
                 </Text>
               </View>
               <View className="flex" pdfMode={pdfMode}>
-                <Text className="bold gold fs-10" pdfMode={pdfMode}>
+                <Text className="bold gold company-details" pdfMode={pdfMode}>
                   Account Name
                 </Text>
                 <Text className="bold dark fs-20" pdfMode={pdfMode}>
@@ -329,7 +329,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
                 </Text>
               </View>
               <View className="flex" pdfMode={pdfMode}>
-                <Text className="bold gold fs-10" pdfMode={pdfMode}>
+                <Text className="bold gold company-details" pdfMode={pdfMode}>
                   Bank Name
                 </Text>
                 <Text className="bold dark fs-20" pdfMode={pdfMode}>
@@ -487,10 +487,10 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
                 />
                 <Text className="right bold dark w-auto" pdfMode={pdfMode}>
                   {formatNumber(
-                    ((typeof subTotal !== 'undefined' && typeof discount !== 'undefined'
+                    (typeof subTotal !== 'undefined' && typeof discount !== 'undefined'
                       ? subTotal - discount
                       : 0
-                    ).toString())
+                    ).toString(),
                   )}
                 </Text>
               </View>
