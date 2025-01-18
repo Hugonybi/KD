@@ -214,35 +214,36 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
           <View className="flex" pdfMode={pdfMode}>
             <View className="w-55" pdfMode={pdfMode}>
               <EditableInput
-                className="bold dark mb-5"
+                className="bold gold mb-5"
                 value={invoice.billTo}
                 onChange={(value) => handleChange('billTo', value)}
                 pdfMode={pdfMode}
               />
               <EditableInput
+                className='dark bold fs-20'
                 placeholder="Your Client's Name"
                 value={invoice.clientName}
                 onChange={(value) => handleChange('clientName', value)}
                 pdfMode={pdfMode}
               />
-              <EditableInput
+              {/* <EditableInput
                 placeholder="Client's Address"
                 value={invoice.clientAddress}
                 onChange={(value) => handleChange('clientAddress', value)}
                 pdfMode={pdfMode}
-              />
-              <EditableInput
+              /> */}
+              {/* <EditableInput
                 placeholder="City, State Zip"
                 value={invoice.clientAddress2}
                 onChange={(value) => handleChange('clientAddress2', value)}
                 pdfMode={pdfMode}
-              />
-              <EditableSelect
+              /> */}
+              {/* <EditableSelect
                 options={countryList}
                 value={invoice.clientCountry}
                 onChange={(value) => handleChange('clientCountry', value)}
                 pdfMode={pdfMode}
-              />
+              /> */}
             </View>
             <View className="w-45" pdfMode={pdfMode}>
               <View className="flex mb-5" pdfMode={pdfMode}>
@@ -311,7 +312,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
               </View>
             </View>
           </View>
-          <View className='  flexRow mt-10' pdfMode={pdfMode}>
+          <View className=' flexRow' pdfMode={pdfMode}>
             <View className=" w-50 mt-10 p-5 pl-10 rounded" pdfMode={pdfMode}>
               <Text className="bold dark fs-10 w-100 flex " pdfMode={pdfMode}>
                 Bank Details
