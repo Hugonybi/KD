@@ -12,6 +12,13 @@
   display: flex;
 }
 
+.flexRow {
+  display:flex;
+  justify-content: end;
+  align-self: flex-end;
+  align-items: end;
+}
+
 .w-auto {
   width: auto !important;
 }

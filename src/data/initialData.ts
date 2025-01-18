@@ -26,7 +26,7 @@ export const initialInvoice: Invoice = {
   invoiceDueDateLabel: 'Due Date',
   invoiceDueDate: '',
   productLineDescription: 'Item Description',
-  productLineQuantity: 'Qty',
+  productLineQuantity: 'Quantity',
   productLineQuantityRate: 'Price',
   productLineQuantityAmount: 'Amount',
   productLines: [{ ...initialProductLine }],
@@ -41,5 +41,5 @@ export const initialInvoice: Invoice = {
   term: 'Please make payment within 15 days',
   accountNumber: '0001402682',
   accountName: 'L JOHNSON ATELIER LTD',
-  accountBank: 'TAAJ BANK',
+  accountBank: 'TAJ BANK',
 }

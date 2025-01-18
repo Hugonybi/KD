@@ -38,6 +38,15 @@ const styles: CSSClasses = {
     flexWrap: 'nowrap',
   },
 
+  'flexRow': {
+    display: 'flex',
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+    justifyContent: 'end',
+    alignItems: 'end',
+  },
+
+
   gap: {
     gap: '8px',
   },
@@ -133,7 +142,7 @@ const styles: CSSClasses = {
   },
 
   'fs-20': {
-    fontSize: '16px',
+    fontSize: '14px',
   },
 
   'fs-30': {
@@ -172,6 +181,14 @@ const styles: CSSClasses = {
     fontSize: '10px', 
     color: '#555',
   },
+
+  'acctflex':{
+    display: 'flex',
+    justifyContent:'end',
+    alignItems: 'end',
+    backgroundColor: 'black',
+  },
+
 }
 
 export default styles
