@@ -14,6 +14,7 @@ import Text from './Text'
 import { Font } from '@react-pdf/renderer'
 import Download from './DownloadPDF'
 import { format } from 'date-fns/format'
+import { predefinedProducts, Product } from '../data/products'
 
 Font.register({
   family: 'Nunito',
@@ -66,27 +67,37 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
     }
   }
 
-  const handleProductLineChange = (index: number, name: keyof ProductLine, value: string) => {
+  const handleProductLineChange = (index: number, name: keyof ProductLine, value: string, product?: Product) => {
     const productLines = invoice.productLines.map((productLine, i) => {
       if (i === index) {
         const newProductLine = { ...productLine }
 
-        if (name === 'description') {
-          newProductLine[name] = value
-        } else if (name === 'rate') {
-          // Special handling for rate/price
-          const newRate = parseFloat(value.replace(/,/g, '')) || 0
-          newProductLine[name] = newRate.toString()
+        if (product) {
+          // Autofill other fields if a predefined product is selected
+          newProductLine.description = product.description
+          newProductLine.quantity = product.quantity
+          newProductLine.rate = product.rate
+          // Calculate amount when product is selected
+          const amount = calculateAmount(product.quantity, product.rate)
+          newProductLine.amount = amount
         } else {
-          if (
-            value[value.length - 1] === '.' ||
-            (value[value.length - 1] === '0' && value.includes('.'))
-          ) {
+          // Handle normal input changes
+          if (name === 'description') {
             newProductLine[name] = value
-          } else {
-            const n = parseFloat(value)
-
-            newProductLine[name] = (n ? n : 0).toString()
+          } else if (name === 'rate') {
+            const newRate = parseFloat(value.replace(/,/g, '')) || 0
+            newProductLine[name] = newRate.toString()
+            // Recalculate amount when rate changes
+            newProductLine.amount = calculateAmount(newProductLine.quantity, newProductLine.rate)
+          } else if (name === 'quantity') {
+            if (value[value.length - 1] === '.' || (value[value.length - 1] === '0' && value.includes('.'))) {
+              newProductLine[name] = value
+            } else {
+              const n = parseFloat(value)
+              newProductLine[name] = (n ? n : 0).toString()
+            }
+            // Recalculate amount when quantity changes
+            newProductLine.amount = calculateAmount(newProductLine.quantity, newProductLine.rate)
           }
         }
 
@@ -97,6 +108,13 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
     })
 
     setInvoice({ ...invoice, productLines })
+  }
+
+  const calculateAmount = (quantity: string, rate: string) => {
+    const quantityNumber = parseFloat(quantity) || 0
+    const rateNumber = parseFloat(rate.replace(/,/g, '')) || 0
+    const amount = quantityNumber * rateNumber
+    return formatNumber(amount.toString())
   }
 
   const handleRemove = (i: number) => {
@@ -133,31 +151,19 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
     return isNaN(number) ? '0' : number.toLocaleString('en-US')
   }
 
-  const calculateAmount = (quantity: string, rate: string) => {
-    const quantityNumber = parseFloat(quantity) || 0
-    const rateNumber = parseFloat(rate) || 0
-    const amount = quantityNumber * rateNumber
-    return formatNumber(amount.toString())
-  }
-
   useEffect(() => {
     let subTotal = 0
+
     invoice.productLines.forEach((productLine) => {
       const quantityNumber = parseFloat(productLine.quantity)
       const rateNumber = parseFloat(productLine.rate)
       const amount = quantityNumber && rateNumber ? quantityNumber * rateNumber : 0
+
       subTotal += amount
     })
-    setSubTotal(subTotal)
 
-    // Update discount in invoice state
-    if (discount !== invoice.discountAmount) {
-      setInvoice((prev) => ({
-        ...prev,
-        discountAmount: discount,
-      }))
-    }
-  }, [invoice.productLines, discount])
+    setSubTotal(subTotal)
+  }, [invoice.productLines])
 
   useEffect(() => {
     if (onChange) {
@@ -178,13 +184,6 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
       onChange(invoice)
     }
   }, [invoice, onChange])
-
-  useEffect(() => {
-    if (data) {
-      setInvoice(data)
-      setDiscount(data.discountAmount || 0)
-    }
-  }, [data])
 
   return (
     <Document pdfMode={pdfMode}>
@@ -232,7 +231,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
                 pdfMode={pdfMode}
               />
               <EditableInput
-                className="dark bold fs-20"
+                className='dark bold fs-20'
                 placeholder="Your Client's Name"
                 value={invoice.clientName}
                 onChange={(value) => handleChange('clientName', value)}
@@ -324,7 +323,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
               </View>
             </View>
           </View>
-          <View className=" flexRow" pdfMode={pdfMode}>
+          <View className=' flexRow' pdfMode={pdfMode}>
             <View className=" w-50 mt-10 p-5 pl-10 rounded" pdfMode={pdfMode}>
               <Text className="bold dark fs-10 w-100 flex " pdfMode={pdfMode}>
                 Bank Details
@@ -403,7 +402,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
                   rows={2}
                   placeholder="Enter item name/description"
                   value={productLine.description}
-                  onChange={(value) => handleProductLineChange(i, 'description', value)}
+                  onChange={(value, product) => handleProductLineChange(i, 'description', value, product)}
                   pdfMode={pdfMode}
                 />
               </View>
@@ -425,7 +424,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
               </View>
               <View className="w-18 p-4-8 pb-10" pdfMode={pdfMode}>
                 <Text className="dark right" pdfMode={pdfMode}>
-                  {formatNumber(calculateAmount(productLine.quantity, productLine.rate))}
+                  {productLine.amount || calculateAmount(productLine.quantity, productLine.rate)}
                 </Text>
               </View>
               {!pdfMode && (
@@ -477,18 +476,17 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
               <View className="w-50 p-5" pdfMode={pdfMode}>
                 <EditableInput
                   className="right bold dark"
-                  value={formatDiscount(invoice.discountAmount?.toString() || '0')}
+                  value={formatDiscount(discount.toString())}
                   onChange={(value) => {
                     const newDiscount = parseFloat(value.replace(/,/g, '')) || 0
                     setDiscount(newDiscount)
-                    handleChange('discountAmount', newDiscount)
                   }}
                   pdfMode={pdfMode}
                 />
               </View>
             </View>
             <View className="flex bg-gray p-5" pdfMode={pdfMode}>
-              <View className="w-auto p-5" pdfMode={pdfMode}>
+              <View className="w-50 p-5" pdfMode={pdfMode}>
                 <EditableInput
                   className="bold"
                   value={invoice.totalLabel}
@@ -503,7 +501,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
                   onChange={(value) => handleChange('currency', value)}
                   pdfMode={pdfMode}
                 />
-                <Text className="right bold dark w-100" pdfMode={pdfMode}>
+                <Text className="right bold dark w-auto" pdfMode={pdfMode}>
                   {formatNumber(
                     (typeof subTotal !== 'undefined' && typeof discount !== 'undefined'
                       ? subTotal - discount
@@ -519,24 +517,24 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
         <View className="mt-20" pdfMode={pdfMode}>
           <EditableInput
             className="bold w-100"
-            value={invoice.termLabel}
+            value={invoice.term}
             onChange={(value) => handleChange('notesLabel', value)}
             pdfMode={pdfMode}
           />
-          <Text
-            className="w-100 fs-10 bold"
-         
+          <EditableTextarea
+            className="w-100"
+            rows={2}
+            value={invoice.notes}
+            onChange={(value) => handleChange('notes', value)}
             pdfMode={pdfMode}
-          >
-            {invoice.notes}
-          </Text>
-          <Text
-            className="w-100 fs-10 bold"
-            
+          />
+          <EditableTextarea
+            className="w-100"
+            rows={2}
+            value={invoice.notes2}
+            onChange={(value) => handleChange('notes', value)}
             pdfMode={pdfMode}
-          >
-            {invoice.notes2}
-          </Text>
+          />
         </View>
         {/* <View className="mt-20" pdfMode={pdfMode}>
           <EditableInput

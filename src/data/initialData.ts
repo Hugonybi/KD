@@ -1,9 +1,10 @@
 import { Invoice } from './types'
 
-export const initialProductLine = {
+export const initialProductLine: ProductLine = {
   description: '',
   quantity: '1',
-  rate: '0.00',
+  rate: '0',
+  amount: '0.00'  // Add this field
 }
 
 export const initialInvoice: Invoice = {

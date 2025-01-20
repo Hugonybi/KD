@@ -207,6 +207,35 @@ const styles: CSSClasses = {
     backgroundColor: 'black',
   },
 
+  'suggestions-container': {
+    position: 'relative',
+    width: '100%',
+  },
+
+  'suggestions-list': {
+    position: 'absolute',
+    top: '100%',
+    left: 0,
+    right: 0,
+    maxHeight: '200px',
+    overflowY: 'auto',
+    backgroundColor: colorWhite,
+    border: `1px solid ${colorGray}`,
+    borderRadius: '4px',
+    zIndex: 1000,
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+  },
+
+  'suggestion-item': {
+    padding: '8px 12px',
+    cursor: 'pointer',
+    fontSize: '13px',
+    color: colorDark,
+    '&:hover': {
+      backgroundColor: colorGray,
+    },
+  },
+
 }
 
 export default styles
