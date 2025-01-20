@@ -146,6 +146,19 @@ const styles: CSSClasses = {
     fontWeight: 'bold',
   },
 
+  'fs-10': {
+    fontSize: '11px',
+  },
+
+  'fs-12': {
+    fontSize: '12px',
+  },
+
+  'fs-14': {
+    fontSize: '14px',
+  },
+
+
   'fs-20': {
     fontSize: '14px',
   },

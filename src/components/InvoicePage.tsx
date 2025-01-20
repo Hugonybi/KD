@@ -519,24 +519,24 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
         <View className="mt-20" pdfMode={pdfMode}>
           <EditableInput
             className="bold w-100"
-            value={invoice.term}
+            value={invoice.termLabel}
             onChange={(value) => handleChange('notesLabel', value)}
             pdfMode={pdfMode}
           />
-          <EditableTextarea
-            className="w-100"
-            rows={2}
-            value={invoice.notes}
-            onChange={(value) => handleChange('notes', value)}
+          <Text
+            className="w-100 fs-10 bold"
+         
             pdfMode={pdfMode}
-          />
-          <EditableTextarea
-            className="w-100"
-            rows={2}
-            value={invoice.notes2}
-            onChange={(value) => handleChange('notes', value)}
+          >
+            {invoice.notes}
+          </Text>
+          <Text
+            className="w-100 fs-10 bold"
+            
             pdfMode={pdfMode}
-          />
+          >
+            {invoice.notes2}
+          </Text>
         </View>
         {/* <View className="mt-20" pdfMode={pdfMode}>
           <EditableInput
