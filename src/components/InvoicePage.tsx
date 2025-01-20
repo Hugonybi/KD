@@ -2,11 +2,11 @@ import { FC, useState, useEffect } from 'react'
 import { Invoice, ProductLine } from '../data/types'
 import { initialInvoice, initialProductLine } from '../data/initialData'
 import EditableInput from './EditableInput'
-import EditableSelect from './EditableSelect'
+// import EditableSelect from './EditableSelect'
 import EditableTextarea from './EditableTextarea'
 import EditableCalendarInput from './EditableCalendarInput'
 import EditableFileImage from './EditableFileImage'
-import countryList from '../data/countryList'
+// import countryList from '../data/countryList'
 import Document from './Document'
 import Page from './Page'
 import View from './View'
@@ -345,7 +345,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
           </View>
         </View>
 
-        <View className="mt-30 bg-gold flex" pdfMode={pdfMode}>
+        <View className="mt-20 bg-gold flex" pdfMode={pdfMode}>
           <View className="w-48 p-4-8" pdfMode={pdfMode}>
             <EditableInput
               className="white bold"
