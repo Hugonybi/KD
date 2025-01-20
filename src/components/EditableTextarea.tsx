@@ -1,7 +1,7 @@
 import { FC, useState, useRef, useEffect } from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
 import { Text } from '@react-pdf/renderer'
-import { productDescriptions } from '../data/suggestions'
+// import { productDescriptions } from '../data/suggestions'
 import { predefinedProducts, Product } from '../data/products'
 import compose from '../styles/compose'
 import styles from '../styles/styles'
