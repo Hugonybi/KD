@@ -12,6 +12,7 @@ export const TProductLine = z.object({
   description: z.string(),
   quantity: z.string(),
   rate: z.string(),
+  amount: z.string()
 })
 
 export const TInvoice = z.object({

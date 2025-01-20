@@ -1,4 +1,4 @@
-import { Invoice } from './types'
+import { Invoice, ProductLine } from './types'
 
 export const initialProductLine: ProductLine = {
   description: '',

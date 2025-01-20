@@ -90,6 +90,12 @@ const styles: CSSClasses = {
     width: '40%',
   },
 
+  'w-30': {
+    width: '30%',
+  },
+
+
+
   'w-48': {
     width: '48%',
   },
@@ -226,15 +232,15 @@ const styles: CSSClasses = {
     boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
   },
 
-  'suggestion-item': {
-    padding: '8px 12px',
-    cursor: 'pointer',
-    fontSize: '13px',
-    color: colorDark,
-    '&:hover': {
-      backgroundColor: colorGray,
-    },
-  },
+  // 'suggestion-item': {
+  //   padding: '8px 12px',
+  //   cursor: 'pointer',
+  //   fontSize: '13px',
+  //   color: colorDark,
+  //   '&:hover': {
+  //     backgroundColor: colorGray,
+  //   },
+  // },
 
 }
 
