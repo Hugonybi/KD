@@ -44,6 +44,7 @@ export const TInvoice = z.object({
   currency: z.string(),
   notesLabel: z.string(),
   notes: z.string(),
+  notes2: z.string(),
   termLabel: z.string(),
   term: z.string(),
   accountNumber: z.string(),

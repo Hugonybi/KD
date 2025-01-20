@@ -517,6 +517,13 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
             onChange={(value) => handleChange('notes', value)}
             pdfMode={pdfMode}
           />
+          <EditableTextarea
+            className="w-100"
+            rows={2}
+            value={invoice.notes2}
+            onChange={(value) => handleChange('notes', value)}
+            pdfMode={pdfMode}
+          />
         </View>
         {/* <View className="mt-20" pdfMode={pdfMode}>
           <EditableInput
