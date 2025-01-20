@@ -55,6 +55,11 @@ const styles: CSSClasses = {
   'w-auto': {
     flex: 1,
     paddingRight: '8px',
+    
+  },
+
+  'w-fit': {
+    width: 'fit-content',
   },
 
   'ml-30': {
