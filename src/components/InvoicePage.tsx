@@ -133,13 +133,13 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
     setInvoice({ ...invoice, productLines })
   }
 
-  const formatNumber = (num: string): string => {
+  const formatNumber = (num: string, decimals: boolean = true): string => {
     const number = parseFloat(num)
     return isNaN(number)
-      ? '0.00'
+      ? '0' + (decimals ? '.00' : '')
       : number.toLocaleString('en-US', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
+          minimumFractionDigits: decimals ? 2 : 0,
+          maximumFractionDigits: decimals ? 2 : 0,
         })
   }
 
@@ -475,7 +475,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
               <View className="w-50 p-5" pdfMode={pdfMode}>
                 <EditableInput
                   className="right bold dark"
-                  value={formatNumber(invoice.discount?.toString() || '0')}
+                  value={formatNumber(invoice.discount?.toString() || '0', false)}
                   onChange={(value) => handleChange('discount', value)}
                   pdfMode={pdfMode}
                 />
