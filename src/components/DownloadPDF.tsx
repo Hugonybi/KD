@@ -69,7 +69,19 @@ const Download: FC<Props> = ({ data, setData }) => {
     }
   }
 
-  const title = data.invoiceTitle ? data.invoiceTitle.toLowerCase() : 'invoice'
+  const toTitleCase = (str: string) => {
+    return str.replace(
+      /\w\S*/g,
+      (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+    )
+  }
+
+  const getFileName = () => {
+    const clientName = data.clientName?.trim() || 'Invoice'
+    const dateStr = format(new Date(), 'MMM-dd')
+    return `${toTitleCase(clientName)}-${dateStr}.pdf`
+  }
+
   return (
     <div className={'download-pdf'}>
       <button
@@ -85,7 +97,7 @@ const Download: FC<Props> = ({ data, setData }) => {
       <PDFDownloadLink
         key="pdf"
         document={<InvoicePage pdfMode={true} data={debounced} />}
-        fileName={`${title}.pdf`}
+        fileName={getFileName()}
         aria-label="Save PDF"
         title="Save PDF"
         className="mt-40"

@@ -143,13 +143,6 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
         })
   }
 
-  // Add this new function after formatNumber
-  const formatDiscount = (num: string): string => {
-    const number = parseFloat(num)
-    return isNaN(number) ? '0' : number.toLocaleString('en-US')
-  }
-
-  // Add this new function after formatDiscount
   const formatPrice = (num: string): string => {
     const number = parseFloat(num)
     return isNaN(number) ? '0' : number.toLocaleString('en-US')
@@ -482,7 +475,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
               <View className="w-50 p-5" pdfMode={pdfMode}>
                 <EditableInput
                   className="right bold dark"
-                  value={invoice.discount?.toString() || '0'}
+                  value={formatNumber(invoice.discount?.toString() || '0')}
                   onChange={(value) => handleChange('discount', value)}
                   pdfMode={pdfMode}
                 />
@@ -520,19 +513,19 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
         <View className="mt-20" pdfMode={pdfMode}>
           <EditableInput
             className="bold w-100"
-            value={invoice.term}
+            value={invoice.termLabel}
             onChange={(value) => handleChange('notesLabel', value)}
             pdfMode={pdfMode}
           />
           <EditableTextarea
-            className="w-100"
+            className="w-100 company-details"
             rows={2}
             value={invoice.notes}
             onChange={(value) => handleChange('notes', value)}
             pdfMode={pdfMode}
           />
           <EditableTextarea
-            className="w-100"
+            className="w-100 company-details"
             rows={2}
             value={invoice.notes2}
             onChange={(value) => handleChange('notes', value)}
