@@ -40,7 +40,6 @@ interface Props {
 const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
   const [invoice, setInvoice] = useState<Invoice>(data ? { ...data } : { ...initialInvoice })
   const [subTotal, setSubTotal] = useState<number>()
-  const [discount, setDiscount] = useState<number>(0) // Initialize with 0
 
   const dateFormat = 'MMM dd, yyyy'
   const invoiceDate = invoice.invoiceDate !== '' ? new Date(invoice.invoiceDate) : new Date()
@@ -57,7 +56,11 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
     if (name !== 'productLines') {
       const newInvoice = { ...invoice } as Record<keyof Invoice, string | number | ProductLine[]>
 
-      if (name === 'logoWidth' && typeof value === 'number') {
+      if (name === 'discount') {
+        // Handle discount as a number
+        const numberValue = typeof value === 'string' ? parseFloat(value.replace(/,/g, '')) || 0 : value
+        newInvoice[name] = numberValue
+      } else if (name === 'logoWidth' && typeof value === 'number') {
         newInvoice[name] = value
       } else if (name !== 'logoWidth' && typeof value === 'string') {
         newInvoice[name] = value
@@ -479,11 +482,8 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
               <View className="w-50 p-5" pdfMode={pdfMode}>
                 <EditableInput
                   className="right bold dark"
-                  value={formatDiscount(discount.toString())}
-                  onChange={(value) => {
-                    const newDiscount = parseFloat(value.replace(/,/g, '')) || 0
-                    setDiscount(newDiscount)
-                  }}
+                  value={invoice.discount?.toString() || '0'}
+                  onChange={(value) => handleChange('discount', value)}
                   pdfMode={pdfMode}
                 />
               </View>
@@ -506,8 +506,8 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
                 />
                 <Text className="right bold dark w-auto" pdfMode={pdfMode}>
                   {formatNumber(
-                    (typeof subTotal !== 'undefined' && typeof discount !== 'undefined'
-                      ? subTotal - discount
+                    (typeof subTotal !== 'undefined' && typeof invoice.discount !== 'undefined'
+                      ? subTotal - invoice.discount
                       : 0
                     ).toString(),
                   )}

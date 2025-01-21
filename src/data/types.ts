@@ -53,10 +53,12 @@ export const TInvoice = z.object({
   accountName: z.string(),
   accountBank: z.string(),
   discountAmount: z.number().optional(),
+  discount: z.number().optional(),
 })
 
 export type Invoice = TypeOf<typeof TInvoice> & {
   _templateName?: string
+  discount?: number;
 }
 
 export interface CSSClasses {
