@@ -57,9 +57,10 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
     if (name !== 'productLines') {
       const newInvoice = { ...invoice } as Record<keyof Invoice, string | number | ProductLine[]>
 
-      if (name === 'discount') {
-        // Handle discount as a number
-        const numberValue = typeof value === 'string' ? parseFloat(value.replace(/,/g, '')) || 0 : value
+      if (name === 'discount' || name === 'paid') {
+        // Handle numeric inputs (discount and paid)
+        const stringValue = typeof value === 'number' ? value.toString() : value
+        const numberValue = parseFloat(stringValue.replace(/,/g, '')) || 0
         newInvoice[name] = numberValue
       } else if (name === 'logoWidth' && typeof value === 'number') {
         newInvoice[name] = value
