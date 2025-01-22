@@ -45,4 +45,5 @@ export const initialInvoice: Invoice = {
   accountName: 'L JOHNSON ATELIER LTD',
   accountBank: 'TAJ BANK',
   discount: 0,
+  paidLabel:''
 }
