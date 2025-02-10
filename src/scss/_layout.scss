@@ -19,6 +19,13 @@
   align-items: end;
 }
 
+.flexCol {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  align-self: flex-end;
+}
+
 .w-fit{
   width: fit-content;
 }

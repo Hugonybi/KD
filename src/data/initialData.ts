@@ -12,8 +12,8 @@ export const initialInvoice: Invoice = {
   logoWidth: 150,
   title: 'INVOICE',
   companyName: '',
-  companyAddress: 'Suite 201, The Capital Hub',
-  companyAddress2: 'Plot 272, Ahmadu Bello Way, Kado, Abuja',
+  companyAddress: '07013397711',
+  companyAddress2: 'larlillian25@gmail.com',
   companyCountry: 'Nigeria',
   billTo: 'Bill To:',
   clientName: '',
@@ -41,9 +41,9 @@ export const initialInvoice: Invoice = {
   notes2: 'Please note that full payment is required on the delivery date. If payment is not made, the company reserves the right to withhold your order until the balance is settled.',
   termLabel: 'Terms & Conditions',
   term: 'Please make payment within 15 days',
-  accountNumber: '0001402682',
-  accountName: 'L JOHNSON ATELIER LTD',
-  accountBank: 'TAJ BANK',
+  accountNumber: '6505855990',
+  accountName: 'Lar Nanfe Lilian',
+  accountBank: 'Providus Bank ',
   discount: 0,
   paidLabel:''
 }
