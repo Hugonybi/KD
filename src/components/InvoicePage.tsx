@@ -195,16 +195,18 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
       <Page className="invoice-wrapper" pdfMode={pdfMode}>
         {!pdfMode && !readOnly && <Download data={invoice} setData={(d) => setInvoice(d)} />}
 
-        <View className="flexCol" pdfMode={pdfMode}>
-          <View className=" " pdfMode={pdfMode}>
-            <EditableFileImage
-              className="logo"
-              placeholder="Company Logo"
-              value={COMPANY_LOGO}
-              width={LOGO_WIDTH}
-              pdfMode={pdfMode}
-            />
-            <View className="right" pdfMode={pdfMode}>
+        <View className="w-50 w-100" pdfMode={pdfMode}>
+          <View className="right " pdfMode={pdfMode}>
+            <View className="w-100" pdfMode={pdfMode}>
+              <EditableFileImage
+                className="flexColChild"
+                placeholder="Company Logo"
+                value={COMPANY_LOGO}
+                width={LOGO_WIDTH}
+                pdfMode={pdfMode}
+              />
+            </View>
+            <View className="" pdfMode={pdfMode}>
               <Text className="  company-details" pdfMode={pdfMode}>
                 {invoice.companyAddress}
               </Text>

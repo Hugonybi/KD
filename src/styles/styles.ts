@@ -46,11 +46,16 @@ const styles: CSSClasses = {
     alignItems: 'end',
   },
 
+  'flexColChild': {
+    marginLeft: 'auto',
+  },
+
+
   'flexCol': {
     display: 'flex',
     flexDirection: 'column',
-    alignSelf: 'flex-end',
-},
+    alignItems: 'end',
+  },
 
 
   gap: {
@@ -155,11 +160,6 @@ const styles: CSSClasses = {
 
   },
 
-  'align-right': {
-    display: 'flex',
-    justifyContent: 'end',
-    textAlign: 'right',
-  },
 
   bold: {
     fontWeight: 'bold',

@@ -22,8 +22,12 @@
 .flexCol {
   display: flex;
   flex-direction: column;
-  text-align: right;
-  align-self: flex-end;
+  align-items: end;
+  
+}
+
+.flexColChild{
+  margin-left: auto;
 }
 
 .w-fit{
