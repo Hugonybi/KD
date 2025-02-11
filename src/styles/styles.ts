@@ -26,6 +26,7 @@ const styles: CSSClasses = {
 
   'bg-dark': {
     backgroundColor: colorDark2,
+    
   },
 
   'bg-gray': {

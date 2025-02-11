@@ -193,7 +193,11 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
   return (
     <Document pdfMode={pdfMode}>
       <Page className="invoice-wrapper" pdfMode={pdfMode}>
-        {!pdfMode && !readOnly && <Download data={invoice} setData={(d) => setInvoice(d)} />}
+        {!pdfMode && !readOnly && (
+          <View className="mb-20 " pdfMode={pdfMode}>
+            <Download data={invoice} setData={(d) => setInvoice(d)} />
+          </View>
+        )}
 
         <View className="w-50 w-100" pdfMode={pdfMode}>
           <View className="right " pdfMode={pdfMode}>
@@ -311,10 +315,10 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
           </View>
         </View>
 
-        <View className="mt-20  row flex" pdfMode={pdfMode}>
+        <View className="mt-20 bg-dark row flex" pdfMode={pdfMode}>
           <View className="w-48 p-4-8" pdfMode={pdfMode}>
             <EditableInput
-              className="dark bold"
+              className="white bold"
               value={invoice.productLineDescription}
               onChange={(value) => handleChange('productLineDescription', value)}
               pdfMode={pdfMode}
@@ -322,7 +326,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
           </View>
           <View className="w-17 p-4-8" pdfMode={pdfMode}>
             <EditableInput
-              className="dark bold right"
+              className="white bold right"
               value={invoice.productLineQuantity}
               onChange={(value) => handleChange('productLineQuantity', value)}
               pdfMode={pdfMode}
@@ -330,7 +334,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
           </View>
           <View className="w-17 p-4-8" pdfMode={pdfMode}>
             <EditableInput
-              className="dark bold right"
+              className="white bold right"
               value={invoice.productLineQuantityRate}
               onChange={(value) => handleChange('productLineQuantityRate', value)}
               pdfMode={pdfMode}
@@ -338,7 +342,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
           </View>
           <View className="w-18 p-4-8" pdfMode={pdfMode}>
             <EditableInput
-              className="dark bold right"
+              className="white bold right"
               value={invoice.productLineQuantityAmount}
               onChange={(value) => handleChange('productLineQuantityAmount', value)}
               pdfMode={pdfMode}

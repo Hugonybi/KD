@@ -44,16 +44,14 @@
 
 .download-pdf {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 20px;
-  align-items:start;
+  align-items: start;
   justify-content: start;
-  position: fixed;
-  top: 100px;
-  margin-left: -110px;
-  width: 40px;
-  height: 40px;
-  transition: opacity 0.2s ease-in-out;
+  margin-bottom: 20px;
+  width: 100%;
+  height: fit-content;
+  
 
   &.loading {
     opacity: 0.3;
@@ -61,33 +59,29 @@
 
   button {
     border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+    border-radius: 8px;
+    background: #f1f1f1;
+    transition: transform 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
   }
 
-  a,
-  label,
-  button {
-    display: block;
-    background-repeat: no-repeat;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  .download-pdf__pdf {
-    background: url('../images/download.svg');
-  }
-  .download-pdf__template_download {
-    width: 30px;
-    height: 30px;
-    background: url('../images/template_download.svg');
-  }
-  .download-pdf__template_upload {
-    width: 30px;
-    height: 30px;
-    background: url('../images/template_upload.svg');
-  }
-  input[type='file'] {
-    visibility: hidden;
+  p {
+    margin: 0;
+    font-size: 12px;
   }
 }
 

@@ -100,7 +100,7 @@ const Download: FC<Props> = ({ data, setData }) => {
         fileName={getFileName()}
         aria-label="Save PDF"
         title="Save PDF"
-        className="mt-40"
+        className=""
       >
         <button>
           <FileDown />
@@ -112,13 +112,13 @@ const Download: FC<Props> = ({ data, setData }) => {
         onClick={handleSaveTemplate}
         aria-label="Save Template"
         title="Save Template"
-        className="mt-40"
+        className=""
       >
         <SaveAll />
         <p className="text-big">Save Invoice</p>
       </button>
 
-      <button onClick={() => navigate('/templates')} className="mt-40 ">
+      <button onClick={() => navigate('/templates')} className="">
         <LibraryBig />
         <p className="text-big">Browse Invoice</p>
       </button>
