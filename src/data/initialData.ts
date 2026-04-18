@@ -12,8 +12,8 @@ export const initialInvoice: Invoice = {
   logoWidth: 150,
   title: 'INVOICE',
   companyName: '',
-  companyAddress: '07013397711',
-  companyAddress2: 'larlillian25@gmail.com',
+  companyAddress: '',
+  companyAddress2: '',
   companyCountry: 'Nigeria',
   billTo: 'Bill To:',
   clientName: '',
@@ -41,9 +41,9 @@ export const initialInvoice: Invoice = {
   notes2: 'Please note that full payment is required on the delivery date. If payment is not made, the company reserves the right to withhold your order until the balance is settled.',
   termLabel: 'Terms & Conditions',
   term: 'Please make payment within 15 days',
-  accountNumber: '6505855990',
-  accountName: 'Lar Nanfe Lilian',
-  accountBank: 'Providus Bank ',
+  accountNumber: '071 347 3496',
+  accountName: 'Abdullahi Kazeem Khadijat',
+  accountBank: 'Access Bank ',
   discount: 0,
   paidLabel:''
 }
