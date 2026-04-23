@@ -274,6 +274,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
                     pdfMode={pdfMode}
                   />
                 </View>
+              
                 <View className="w-60" pdfMode={pdfMode}>
                   <EditableCalendarInput
                     value={format(invoiceDate, dateFormat)}
@@ -287,8 +288,9 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
                     pdfMode={pdfMode}
                   />
                 </View>
+                
               </View>
-              {/* <View className="flex mb-5" pdfMode={pdfMode}>
+              <View className="flex mb-5" pdfMode={pdfMode}>
                 <View className="w-40" pdfMode={pdfMode}>
                   <EditableInput
                     className="bold"
@@ -310,7 +312,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
                     pdfMode={pdfMode}
                   />
                 </View>
-              </View> */}
+              </View>
             </View>
           </View>
         </View>
@@ -443,7 +445,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
                 />
               </View>
             </View>
-            {/* <View className="flex" pdfMode={pdfMode}>
+            <View className="flex" pdfMode={pdfMode}>
               <View className="w-50 p-5" pdfMode={pdfMode}>
                 <EditableInput
                   value="Amount Paid"
@@ -459,7 +461,7 @@ const InvoicePage: FC<Props> = ({ data, pdfMode, onChange, readOnly }) => {
                   pdfMode={pdfMode}
                 />
               </View>
-            </View> */}
+            </View>
             <View className="flex bg-gray p-5" pdfMode={pdfMode}>
               <View className="w-40 p-5 " pdfMode={pdfMode}>
                 <EditableInput
